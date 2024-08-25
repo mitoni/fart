@@ -11,6 +11,7 @@ export default function Pictos() {
                 {Array.from({ length: 4 }).map((_, i) => (
                     <motion.div
                         key={i}
+                        // @ts-ignore
                         className={styles.image}
                         initial={{ opacity: 1, rotateZ: i * -90 }}
                         whileInView={{ opacity: 1, rotateZ: 0 }}
@@ -27,6 +28,7 @@ export default function Pictos() {
             </div>
 
             <motion.div
+                // @ts-ignore
                 className={styles.left}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -40,7 +42,11 @@ export default function Pictos() {
                 </p>
             </motion.div>
 
-            <motion.div className={styles.right} style={{ textAlign: "right" }}>
+            <motion.div
+                // @ts-ignore
+                className={styles.right}
+                style={{ textAlign: "right" }}
+            >
                 <motion.h3
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}

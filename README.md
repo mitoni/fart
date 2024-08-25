@@ -1,8 +1,3 @@
-# blank
+# FART
 
-blank
-
-## Attributes
-
-- **Database**: mongodb
-- **Storage Adapter**: localDisk
+Factory of Art Website using Payload CMS v3

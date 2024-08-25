@@ -1,0 +1,32 @@
+.container {
+    position: fixed;
+    inset: 0;
+
+    padding: min(5%, 50px);
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+
+    color: var(--yellow);
+    font-size: 2rem;
+    font-weight: 600;
+
+    z-index: 98;
+
+    pointer-events: none;
+}
+
+.shadow {
+    filter: drop-shadow(0 0 2rem #1f1abf);
+}
+
+.catcher {
+    pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+    .container {
+        position: absolute;
+    }
+}

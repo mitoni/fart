@@ -6,6 +6,8 @@ import Footer from "@/components/footer/footer";
 import { getPayloadHMR } from "@payloadcms/next/utilities";
 import config from "@/payload.config";
 
+export const revalidate = 5;
+
 export default async function Home() {
     const payload = await getPayloadHMR({
         config,

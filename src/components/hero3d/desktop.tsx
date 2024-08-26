@@ -130,8 +130,6 @@ const Images = React.forwardRef(function Images({ projects = [] }: { projects: a
 
     const group = React.useRef<Group>(null!);
 
-    console.log({ projects });
-
     React.useImperativeHandle(ref, () => {
         return {
             move(p: number) {

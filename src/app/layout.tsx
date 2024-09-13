@@ -1,6 +1,8 @@
 import "./globals.css";
 import CirclePointer from "@/components/circlepointer/circlepointer";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
     title: "F.ART - WE CREATE WORLDS",
     description:

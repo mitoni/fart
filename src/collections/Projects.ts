@@ -16,6 +16,13 @@ export const Projects: CollectionConfig = {
             required: true,
         },
         {
+            name: "category",
+            type: "relationship",
+            relationTo: "categories",
+            hasMany: true,
+            required: true,
+        },
+        {
             name: "image",
             type: "upload",
             relationTo: "media",

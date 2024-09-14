@@ -91,6 +91,33 @@ export interface Project {
   description: string;
   category: (string | Category)[];
   image: string | Media;
+  sections?:
+    | {
+        text: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        images?:
+          | {
+              image: string | Media;
+              position: 'left' | 'right';
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }

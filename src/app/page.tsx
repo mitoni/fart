@@ -18,6 +18,8 @@ export default async function Home() {
         pagination: false,
     });
 
+    projects.sort(() => Math.random() - 0.5);
+
     return (
         <div className={styles.main}>
             <Animation />

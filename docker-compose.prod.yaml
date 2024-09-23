@@ -6,7 +6,6 @@ services:
     volumes:
       # - .:/app
       - media:/app/media
-      - node_modules:/app/node_modules
     restart: always
     depends_on:
       - mongo
@@ -29,4 +28,3 @@ services:
 volumes:
   data:
   media:
-  node_modules:

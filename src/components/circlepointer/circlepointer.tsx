@@ -84,6 +84,8 @@ export default function CirclePointer() {
                     background: "var(--diff)",
                     mixBlendMode: "difference",
                     pointerEvents: "none",
+                    WebkitUserSelect: "none",
+                    userSelect: "none",
                 }}
             />
         </div>

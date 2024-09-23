@@ -21,7 +21,10 @@ export default buildConfig({
             baseDir: path.resolve(dirname),
         },
         livePreview: {
-            url: "http://localhost:3000",
+            // url: "http://localhost:3000/projects/id",
+            url: ({ data }) => {
+                return `http://localhost:3000/projects/${data.id}`;
+            },
             collections: ["projects"],
         },
     },

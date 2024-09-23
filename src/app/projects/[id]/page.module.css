@@ -1,0 +1,12 @@
+.main {
+    background: var(--blue);
+    min-height: 100vh;
+    color: var(--yellow);
+    font-weight: 600;
+}
+
+.heroContainer {
+    margin: 0 auto;
+    height: 110vh;
+    max-width: var(--max-width);
+}

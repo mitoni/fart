@@ -12,6 +12,7 @@ import { damp3 } from "maath/easing";
 import { remap } from "maath/misc";
 
 import { emitter } from "@/emitter/emitter";
+import { useRouter } from "next/navigation";
 
 const SPACE = 5;
 const BASE_FONT_SIZE = 1;
@@ -22,9 +23,11 @@ const Image3D = React.forwardRef(function Image(
     props: React.ComponentProps<typeof _Image> & { ["data-key"]: number } & {
         project: any;
     },
-    _: any
+    _: any,
 ) {
     const { position, "data-key": dataKey, scale, project, ...args } = props;
+
+    const router = useRouter();
 
     const iref = React.useRef<any>(null!);
     const title = React.useRef<any>(null!);
@@ -39,24 +42,23 @@ const Image3D = React.forwardRef(function Image(
     const anchorX = pos == "right" ? "left" : "right";
     const textAlign = pos == "right" ? "left" : "right";
 
-    const sx = Array.isArray(scale) ? scale?.[0] ?? 1 : 1;
-    const sy = Array.isArray(scale) ? scale?.[1] ?? 1 : 1;
-    const sMult = 2.5;
+    const sx = Array.isArray(scale) ? (scale?.[0] ?? 1) : 1;
+    const sy = Array.isArray(scale) ? (scale?.[1] ?? 1) : 1;
+    const sMult = 1.5;
 
     useFrame((_, delta) => {
         damp3(iref.current.scale, hover.current ? [sx * sMult, sy * sMult, 1] : [sx, sy, 1], 0.25, delta);
 
         damp3(
             text.current.position,
-            hover.current
-                ? pos == "right"
-                    ? [1.5 * s[0]!, 0, 1]
-                    : [-1.5 * s[0]!, 0, 1]
-                : pos == "right"
-                ? [0.75 * s[0]!, 0, 1]
-                : [-0.75 * s[0]!, 0, 1],
+            hover.current ?
+                pos == "right" ?
+                    [1.5 * s[0]!, 0, 1]
+                :   [-1.5 * s[0]!, 0, 1]
+            : pos == "right" ? [0.75 * s[0]!, 0, 1]
+            : [-0.75 * s[0]!, 0, 1],
             0.25,
-            delta
+            delta,
         );
         // damp(title.current, "fillOpacity", hover.current ? 1 : 0, 0.25, delta);
         // damp(
@@ -81,7 +83,7 @@ const Image3D = React.forwardRef(function Image(
     });
 
     return (
-        <group position={position}>
+        <group position={position} onClick={() => router.push(`/projects/${project.id}`)}>
             <group ref={gref}>
                 <_Image
                     ref={iref}
@@ -114,7 +116,8 @@ const Image3D = React.forwardRef(function Image(
                         color={TEXT_COLOR}
                         fillOpacity={1}
                     >
-                        {project.description}
+                        {project.subtitle ? `${project.subtitle}\n` : null}
+                        {project.category?.map((category) => category.title).join(" / ")}
                         <meshBasicMaterial toneMapped={false} color={TEXT_COLOR} />
                     </Text>
                 </group>
@@ -149,9 +152,10 @@ const Images = React.forwardRef(function Images({ projects = [] }: { projects: a
     }, []);
 
     useFrame((_, delta) => {
-        const target = triggered.current
-            ? new Vector3(0, 0, scrolled.current * projects?.length * SPACE)
-            : group.current.position.clone().add(new Vector3(0, 0, 0.1));
+        const target =
+            triggered.current ?
+                new Vector3(0, 0, scrolled.current * projects?.length * SPACE)
+            :   group.current.position.clone().add(new Vector3(0, 0, 0.1));
 
         damp3(group.current.position, target, 0.25, delta);
     });
@@ -174,7 +178,7 @@ const Images = React.forwardRef(function Images({ projects = [] }: { projects: a
                     <Image3D
                         key={project.id}
                         data-key={project.id}
-                        scale={[(1 / height) * 5000, (1 / width) * 5000]}
+                        scale={[(1 / height) * 7000, (1 / width) * 7000]}
                         position={position}
                         url={project.image.url}
                         project={project}

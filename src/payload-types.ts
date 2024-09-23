@@ -88,8 +88,29 @@ export interface Media {
 export interface Project {
   id: string;
   title: string;
-  description: string;
+  subtitle?: string | null;
   category: (string | Category)[];
+  client: string;
+  date: string;
+  involvement: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  description_html?: string | null;
+  backgroundColor?: string | null;
+  textColor?: string | null;
   image: string | Media;
   sections?:
     | {
@@ -108,6 +129,7 @@ export interface Project {
           };
           [k: string]: unknown;
         };
+        text_html?: string | null;
         images?:
           | {
               image: string | Media;

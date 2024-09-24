@@ -20,13 +20,6 @@ export default buildConfig({
         importMap: {
             baseDir: path.resolve(dirname),
         },
-        livePreview: {
-            // url: "http://localhost:3000/projects/id",
-            url: ({ data }) => {
-                return `http://localhost:3000/projects/${data.id}`;
-            },
-            collections: ["projects"],
-        },
     },
     collections: [Users, Media, Projects, Categories],
     editor: lexicalEditor(),

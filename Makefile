@@ -27,3 +27,7 @@ logs:
 
 ssh:
 	ssh -i "~/.ssh/fart-website-kp.pem" $(instance)
+
+update:
+	DOCKER_HOST=ssh://$(instance) docker compose -f docker-compose.prod.yaml pull
+	DOCKER_HOST=ssh://$(instance) docker compose -f docker-compose.prod.yaml up -d --build
